@@ -23,7 +23,7 @@ Soft Elixir is a browser-based sequencer.
 | Demo | Track 1 | In development |
 | Demo | Track 2 | In development |
 | Demo | Track 3 | Research |
-| DSP | Delay | Reearch |
+| DSP | Delay | Research |
 | DSP | Reverb | Research |
 | Func | Track FX | - |
 | Func | Song data schema validation | - |
