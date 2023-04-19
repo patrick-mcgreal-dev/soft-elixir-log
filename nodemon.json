@@ -1,0 +1,4 @@
+{
+    "watch": ["build.js", "src"],
+    "ext": "ejs,scss,md"
+}

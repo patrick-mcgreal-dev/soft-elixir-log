@@ -1,0 +1,89 @@
+@use 'reset';
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* INDEX start */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+body {
+    font-family: Helvetica, sans-serif;
+    background-color: #eee;
+}
+
+.container {
+    max-width: 750px;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+
+h1 {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding-bottom: 0.3em;
+    border-bottom: 2px double black;
+
+    font-size: 1.8em;
+    font-weight: 300;
+    line-height: 1.25;
+}
+
+h2 {
+    margin-top: 36px;
+    margin-bottom: 16px;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #bdbdbd;
+
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1.25;
+}
+
+h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+
+    font-size: 1.25em;
+    font-weight: 300;
+    line-height: 1.25;
+    text-decoration: underline;
+}
+
+p {
+    margin-bottom: 16px;
+    line-height: 1.5em;
+}
+
+ul {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding-left: 2em;
+
+    list-style-type: disc;
+}
+
+ul ul {
+    list-style-type: circle;
+}
+
+li {
+    line-height: 1.5em;
+}
+
+li:not(:first-of-type) {
+    margin-top: .25em;
+}
+
+a {
+    color: #0366d6;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: 600;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* INDEX end */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

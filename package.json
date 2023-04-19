@@ -1,0 +1,20 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "## About me",
+  "main": "build.js",
+  "scripts": {
+    "build": "nodemon build.js",
+    "serve": "node server.js",
+    "dev": "npm run build & npm run serve"
+  },
+  "author": "Patrick McGreal",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "marked": "^4.0.9",
+    "nodemon": "^2.0.15",
+    "sass": "^1.47.0"
+  }
+}
