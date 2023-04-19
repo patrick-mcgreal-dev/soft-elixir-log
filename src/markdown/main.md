@@ -51,8 +51,8 @@ drawArea(top: number, bottom: number, left: number, right: number) {
   // ...
 
   // draw visible area
-  for (let column = area.left; column <= area.right; column++) {
-    for (let row = area.top; row <= area.bottom; row++) {
+  for (let column = left; column <= right; column++) {
+    for (let row = top; row <= bottom; row++) {
       // draw cell
     }
   }
