@@ -4,14 +4,12 @@ Soft Elixir is a browser-based sequencer.
 
 ![Soft Elixir]()
 
-{[demo]()} // {[current features](#current-features)} // {[docs](#docs)} // {[dev notes](#dev-notes)}
+{[demo]()} // {[current features](#current-features)} // {[dev notes](#dev-notes)}
 
 ## Current features
 
 - Tracker-style pattern sequencing
 - Sampler
-
-## Docs
 
 ## Dev notes
 
@@ -38,11 +36,9 @@ Soft Elixir is a browser-based sequencer.
 | DSP | Chorus | - |
 | Func | Networking | - |
 
-### Sequencing
-
 ### Rendering
 
-The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It's also extremely inefficient when it comes to rendering a constantly moving grid of data.
+The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It's also extremely inefficient when it comes to producing a constantly moving grid of data.
 
 [Off-screen canvas rendering](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) has obvious advantages. We can push expensive animation operations to a separate thread via a [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) in order to protect the main processing thread.
 
@@ -64,8 +60,10 @@ drawArea(top: number, bottom: number, left: number, right: number) {
 }
 ```
 
-To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, the effect of navigating the grid can be produced:
+To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, we can produve the effect of navigating the grid:
 
 <video controls>
   <source src="/assets/canvas-1.mov" type="video/mp4">
 </video>
+
+### Sequencing

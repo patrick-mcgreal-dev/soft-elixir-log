@@ -11,13 +11,12 @@
         <h1 id="soft-elixir">Soft Elixir</h1>
 <p>Soft Elixir is a browser-based sequencer.</p>
 <p><img src="" alt="Soft Elixir"></p>
-<p>{<a href="">demo</a>} // {<a href="#current-features">current features</a>} // {<a href="#docs">docs</a>} // {<a href="#dev-notes">dev notes</a>}</p>
+<p>{<a href="">demo</a>} // {<a href="#current-features">current features</a>} // {<a href="#dev-notes">dev notes</a>}</p>
 <h2 id="current-features">Current features</h2>
 <ul>
 <li>Tracker-style pattern sequencing</li>
 <li>Sampler</li>
 </ul>
-<h2 id="docs">Docs</h2>
 <h2 id="dev-notes">Dev notes</h2>
 <p>{<a href="#todo">todo</a>} // {<a href="#sequencing">sequencing</a>} // {<a href="#rendering">rendering</a>}</p>
 <h3 id="todo">Todo</h3>
@@ -110,9 +109,8 @@
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id="sequencing">Sequencing</h3>
 <h3 id="rendering">Rendering</h3>
-<p>The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It&#39;s also extremely inefficient when it comes to rendering a constantly moving grid of data.</p>
+<p>The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It&#39;s also extremely inefficient when it comes to producing a constantly moving grid of data.</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. We can push expensive animation operations to a separate thread via a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main processing thread.</p>
 <p>By implementing a simple <code>drawArea</code> function, we draw only what should currently be visible:</p>
 <pre><code>drawArea(top: number, bottom: number, left: number, right: number) {
@@ -129,10 +127,13 @@
 
 }
 </code></pre>
-<p>To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, the effect of navigating the grid can be produced:</p>
+<p>To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, we can produve the effect of navigating the grid:</p>
 <video controls>
   <source src="/assets/canvas-1.mov" type="video/mp4">
 </video>
+
+<h3 id="sequencing">Sequencing</h3>
+
     </div>
 </body>
 </html>
