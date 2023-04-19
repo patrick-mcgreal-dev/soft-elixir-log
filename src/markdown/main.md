@@ -60,7 +60,7 @@ drawArea(top: number, bottom: number, left: number, right: number) {
 }
 ```
 
-To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, we can produve the effect of navigating the grid:
+To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, we can produce the effect of navigating the grid:
 
 <video controls>
   <source src="/assets/canvas-1.mov" type="video/mp4">
