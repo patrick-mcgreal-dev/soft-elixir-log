@@ -6,12 +6,12 @@ const marked = require('marked');
 
 // prevent marked from adding id elements to headers
 // see here: https://github.com/treasonx/grunt-markdown/issues/54
-const renderer = new marked.Renderer();
-renderer.heading = (text, level) => { 
-    return `<h${level}>${text}</h${level}>\n`;
-};
+// const renderer = new marked.Renderer();
+// renderer.heading = (text, level) => { 
+//     return `<h${level}>${text}</h${level}>\n`;
+// };
 
-marked.use({ renderer });
+// marked.use({ renderer });
 
 module.exports = {
 

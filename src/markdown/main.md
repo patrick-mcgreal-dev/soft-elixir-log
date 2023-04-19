@@ -2,7 +2,7 @@
 
 Soft Elixir is a browser-based sequencer.
 
-[Try the demo]() or [read the docs]().
+[Try the demo]() or [read the docs](#todo).
 
 ![Soft Elixir]()
 
@@ -19,3 +19,5 @@ Soft Elixir is a browser-based sequencer.
 | Song data schema validation | - |
 | Pattern play direction | - |
 | VU meters | - |
+
+## Docs
