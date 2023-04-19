@@ -67,7 +67,7 @@ a {
 /* INDEX start */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: Times;
   background-color: #eee;
 }
 
@@ -75,6 +75,10 @@ body {
   max-width: 750px;
   margin: 32px auto;
   padding: 0 16px;
+}
+
+img {
+  font-style: italic;
 }
 
 h1 {
