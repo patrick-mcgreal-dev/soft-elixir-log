@@ -13,7 +13,7 @@ Soft Elixir is a browser-based sequencer.
 
 ## Dev notes
 
-{[todo](#todo)} // {[sequencing](#sequencing)} // {[rendering](#rendering)}
+{[todo](#todo)} // {[rendering](#rendering)} // {[sequencing](#sequencing)}
 
 ### Todo
 
