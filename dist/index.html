@@ -10,14 +10,21 @@
     <div class="container">
         <h1 id="soft-elixir">Soft Elixir</h1>
 <p>Soft Elixir is a browser-based sequencer.</p>
-<p><a href="">Try the demo</a> or <a href="#todo">read the docs</a>.</p>
 <p><img src="" alt="Soft Elixir"></p>
+<ul>
+<li>{<a href="">demo</a>}</li>
+<li>{<a href="#current-features">current features</a>}</li>
+<li>{<a href="#docs">docs</a>}</li>
+<li>{<a href="#dev-notes">dev notes</a>}</li>
+</ul>
 <h2 id="current-features">Current features</h2>
 <ul>
 <li>Tracker-style pattern sequencing</li>
 <li>Sampler</li>
 </ul>
-<h2 id="todo">Todo</h2>
+<h2 id="docs">Docs</h2>
+<h2 id="dev-notes">Dev notes</h2>
+<h3 id="todo">Todo</h3>
 <table>
 <thead>
 <tr>
@@ -45,6 +52,21 @@
 <td>Demo</td>
 <td>Track 3</td>
 <td>Research</td>
+</tr>
+<tr>
+<td>DSP</td>
+<td>Delay</td>
+<td>Reearch</td>
+</tr>
+<tr>
+<td>DSP</td>
+<td>Reverb</td>
+<td>Research</td>
+</tr>
+<tr>
+<td>Func</td>
+<td>Track FX</td>
+<td>-</td>
 </tr>
 <tr>
 <td>Func</td>
@@ -76,9 +98,45 @@
 <td>Docs</td>
 <td>-</td>
 </tr>
+<tr>
+<td>DSP</td>
+<td>EQ</td>
+<td>-</td>
+</tr>
+<tr>
+<td>DSP</td>
+<td>Chorus</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Func</td>
+<td>Networking</td>
+<td>-</td>
+</tr>
 </tbody></table>
-<h2 id="docs">Docs</h2>
+<h3 id="sequencing">Sequencing</h3>
+<h3 id="rendering">Rendering</h3>
+<p>The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It&#39;s also extremely inefficient when it comes to rendering a constantly moving grid of data.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. We can push expensive animation operations to a separate thread via a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main processing thread.</p>
+<p>By implementing a simple <code>drawArea</code> function, we draw only what should currently be visible:</p>
+<pre><code>drawArea(top: number, bottom: number, left: number, right: number) {
 
+  // clear canvas
+  // ...
+
+  // draw visible area
+  for (let column = area.left; column &lt;= area.right; column++) {
+    for (let row = area.top; row &lt;= area.bottom; row++) {
+      // draw cell
+    }
+  }
+
+}
+</code></pre>
+<p>To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, the effect of navigating the grid can be produced:</p>
+<video controls>
+  <source src="/assets/canvas-1.mov" type="video/mp4">
+</video>
     </div>
 </body>
 </html>

@@ -2,16 +2,23 @@
 
 Soft Elixir is a browser-based sequencer.
 
-[Try the demo]() or [read the docs](#todo).
-
 ![Soft Elixir]()
+
+- {[demo]()}
+- {[current features](#current-features)}
+- {[docs](#docs)}
+- {[dev notes](#dev-notes)}
 
 ## Current features
 
 - Tracker-style pattern sequencing
 - Sampler
 
-## Todo
+## Docs
+
+## Dev notes
+
+### Todo
 
 | Area | Task | Status |
 | --- | --- | --- |
@@ -32,4 +39,34 @@ Soft Elixir is a browser-based sequencer.
 | DSP | Chorus | - |
 | Func | Networking | - |
 
-## Docs
+### Sequencing
+
+### Rendering
+
+The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It's also extremely inefficient when it comes to rendering a constantly moving grid of data.
+
+[Off-screen canvas rendering](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) has obvious advantages. We can push expensive animation operations to a separate thread via a [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) in order to protect the main processing thread.
+
+By implementing a simple `drawArea` function, we draw only what should currently be visible:
+
+```
+drawArea(top: number, bottom: number, left: number, right: number) {
+
+  // clear canvas
+  // ...
+
+  // draw visible area
+  for (let column = area.left; column <= area.right; column++) {
+    for (let row = area.top; row <= area.bottom; row++) {
+      // draw cell
+    }
+  }
+
+}
+```
+
+To handle user navigation and input, a DOM element can be placed on top of the canvas. By locking the position of this DOM element to column width and row height, the effect of navigating the grid can be produced:
+
+<video controls>
+  <source src="/assets/canvas-1.mov" type="video/mp4">
+</video>
