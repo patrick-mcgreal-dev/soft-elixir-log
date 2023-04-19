@@ -20,6 +20,7 @@ Soft Elixir is a browser-based sequencer.
 | Area | Task | Status |
 | --- | --- | --- |
 | Func | Track solo controls | In development |
+| UI | Number box | In development |
 | Demo | Track 1 | In development |
 | Demo | Track 2 | In development |
 | Demo | Track 3 | Research |
@@ -29,7 +30,7 @@ Soft Elixir is a browser-based sequencer.
 | Func | Song data schema validation | - |
 | Func | Pattern play direction | - |
 | UI | VU meters | - |
-| UI | Number box | - |
+| UI | Waveform display | - |
 | UI | Text box | - |
 | Demo | Docs | - |
 | DSP | EQ | - |
