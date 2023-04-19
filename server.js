@@ -1,6 +1,6 @@
 const exp = require('express');
 const app = exp();
-const port = 3000;
+const port = 3001;
 
 app.use(exp.static('./dist', { extensions: 'html' }));
 
