@@ -4,10 +4,7 @@ Soft Elixir is a browser-based sequencer.
 
 ![Soft Elixir]()
 
-- {[demo]()}
-- {[current features](#current-features)}
-- {[docs](#docs)}
-- {[dev notes](#dev-notes)}
+{[demo]()} // {[current features](#current-features)} // {[docs](#docs)} // {[dev notes](#dev-notes)}
 
 ## Current features
 
@@ -17,6 +14,8 @@ Soft Elixir is a browser-based sequencer.
 ## Docs
 
 ## Dev notes
+
+{[todo](#todo)} // {[sequencing](#sequencing)} // {[rendering](#rendering)}
 
 ### Todo
 
