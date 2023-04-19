@@ -6,13 +6,15 @@
 
 body {
     font-family: Times;
-    background-color: #eee;
+    background-color: #f7f7f7;
+    padding: 0 16px;
 }
 
 .container {
     max-width: 750px;
     margin: 32px auto;
-    padding: 0 16px;
+    padding: 0 32px;
+    border: 1px dotted;
 }
 
 img {
@@ -30,6 +32,7 @@ th, td {
 
 code {
     font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
     background-color: white;
 }
 
