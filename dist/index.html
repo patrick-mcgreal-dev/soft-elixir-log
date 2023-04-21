@@ -168,6 +168,41 @@
       super();
       this.model = {};
       this.modelSetters = {};
+      this.modkeys = [];
+      this.controls = {};
+      this.actions = {};
+      this.controlElementSelectors = [];
+      this.keyspressed = [];
+      // CONTROLS
+      this.keyup = (e) => {
+        if (this.modkeys.includes(e.key)) {
+          this.keyspressed = this.keyspressed.filter((k) => k != `mod-${e.key}`);
+        } else {
+          this.keyspressed = this.keyspressed.filter((k) => k != e.key);
+        }
+      };
+      this.keydown = (e) => {
+        e.preventDefault();
+        if (this.modkeys.includes(e.key)) {
+          this.keyspressed = [`mod-${e.key}`];
+          return false;
+        }
+        this.keyspressed.push(e.key);
+        if (this.keyevent(this.keyspressed.join(" "))) {
+          this.keyspressed = this.keyspressed.filter((k) => k.includes("mod"));
+          return true;
+        }
+        if (this.keyspressed.length > 0) {
+          const keys = this.keyspressed.join(" ");
+          for (let child of this.controlElementSelectors) {
+            if (this.element(child).keyevent(keys)) {
+              this.keyspressed = this.keyspressed.filter((k) => k.includes("mod"));
+              return true;
+            }
+          }
+        }
+        return false;
+      };
       this.attachShadow({ mode: "open" });
     }
     resetMarkup() {
@@ -234,13 +269,21 @@
     }
     // SHADOW ROOT CONVENIENCE FUNCTIONS
     element(selector) {
-      return this.shadowRoot.querySelector(selector);
+      return this.shadowRoot?.querySelector(selector);
     }
     elements(selector) {
-      return this.shadowRoot.querySelectorAll(selector);
+      return this.shadowRoot?.querySelectorAll(selector);
     }
     appendElement(element) {
-      this.shadowRoot.appendChild(element);
+      this.shadowRoot?.appendChild(element);
+    }
+    keyevent(keys) {
+      const control = this.controls[keys];
+      if (control) {
+        this.actions[control](keys);
+        return true;
+      }
+      return false;
     }
   };
 
@@ -291,7 +334,7 @@
         digits: 0,
         min: 0,
         max: 0,
-        value: 0,
+        value: -1,
         // functional
         digit: "",
         textArray: []
@@ -320,6 +363,9 @@
         }
       };
       this.actions = {
+        "digit": (key) => {
+          this.setModelValue("digit", key);
+        },
         "clear": () => {
           this.setModelValue("value", -1);
         },
@@ -343,6 +389,17 @@
         }
       };
       this.controls = {
+        // this is shameful...
+        "0": "digit",
+        "1": "digit",
+        "2": "digit",
+        "3": "digit",
+        "4": "digit",
+        "5": "digit",
+        "6": "digit",
+        "7": "digit",
+        "8": "digit",
+        "9": "digit",
         "d": "clear",
         "mod-s ArrowUp": "inc",
         "mod-s ArrowDown": "dec",
@@ -350,19 +407,6 @@
         "mod-s ArrowLeft": "decTen"
       };
       super.resetMarkup();
-    }
-    keydown(keys) {
-      if (!isNaN(+keys)) {
-        this.setModelValue("digit", keys);
-        return true;
-      }
-      for (let control in this.controls) {
-        if (keys != control)
-          continue;
-        this.actions[this.controls[control]]();
-        return true;
-      }
-      return false;
     }
   };
 
@@ -435,7 +479,7 @@
       this.name = "grid-boxes";
       this.markup = /*html*/
       `
-  <div>
+  <div class="container">
     <table>
       <tbody>
       </tbody>
@@ -445,11 +489,12 @@
       this.css = /*css*/
       `
     :host {
-      font-family: monospace;
-      font-size: 13px;
       display: inline-block;
       border: 1px dotted;
       padding: 6px;
+    }
+    .container {
+      
     }
     th, td {
       padding: 3px;
@@ -491,8 +536,6 @@
             oldCell.setModelValue("active", false);
           const cellQuery = `tr:nth-child(${newValue[1]}) td:nth-child(${newValue[0]}) ${this.model.element}`;
           this.element(cellQuery).setModelValue("active", true);
-        },
-        cells: (oldValue, newValue) => {
         }
       };
       this.actions = {
@@ -545,35 +588,9 @@
         "mod-a ArrowLeft": "nav-left-end",
         "mod-a ArrowRight": "nav-right-end"
       };
-      this.keyspressed = [];
-      this.keyup = (e) => {
-        if (this.modkeys.includes(e.key)) {
-          this.keyspressed = this.keyspressed.filter((k) => k != `mod-${e.key}`);
-        } else {
-          this.keyspressed = this.keyspressed.filter((k) => k != e.key);
-        }
-      };
-      this.keydown = (e) => {
-        e.preventDefault();
-        if (this.modkeys.includes(e.key)) {
-          this.keyspressed = [];
-          this.keyspressed.push(`mod-${e.key}`);
-          return;
-        }
-        this.keyspressed.push(e.key);
-        for (let control in this.controls) {
-          if (this.keyspressed.join(" ") != control)
-            continue;
-          this.actions[this.controls[control]]();
-          this.keyspressed = this.keyspressed.filter((k) => k.includes("mod"));
-          return;
-        }
-        if (this.keyspressed.length > 0) {
-          if (this.element(`${this.model.element}[active="true"]`).keydown(this.keyspressed.join(" "))) {
-            this.keyspressed = this.keyspressed.filter((k) => k.includes("mod"));
-          }
-        }
-      };
+      this.controlElementSelectors = [
+        `${this.model.element}[active="true"]`
+      ];
       super.resetMarkup();
     }
   };
@@ -637,8 +654,8 @@
     window.customElements.define(comp, components[comp]);
   }
   var controlRegions = {
-    "grid-numbers": document.querySelector("grid-numbers"),
-    "grid-defs": document.querySelector("grid-defs")
+    "grid-numbers": document.querySelector("grid-numbers")
+    // "grid-defs": document.querySelector("grid-defs") as CustomElement,
   };
   document.addEventListener("click", (e) => {
     for (let region in controlRegions) {
@@ -647,7 +664,7 @@
     }
   });
   controlRegions["grid-numbers"].setModel({ cells: [8, 8], active: true });
-  controlRegions["grid-defs"].setModel({ cells: [8, 8] });
 })();
+
 </script>
 </html>

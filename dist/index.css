@@ -171,6 +171,10 @@ video {
   height: 100%;
 }
 
+grid-numbers {
+  font-family: monospace;
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* INDEX end */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
