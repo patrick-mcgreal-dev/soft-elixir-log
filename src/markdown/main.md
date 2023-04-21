@@ -13,7 +13,7 @@ Soft Elixir is a browser-based sequencer.
 
 ## Dev notes
 
-{[to do](#to-do)} // {[sequencing](#sequencing)} // {[controls](#controls)} //{[rendering](#rendering)}
+{[to do](#to-do)} // {[sequencing](#sequencing)} // {[pattern editor](#pattern-editor)} //{[rendering](#rendering)}
 
 ### To do
 
@@ -45,7 +45,7 @@ Soft Elixir is a browser-based sequencer.
 
 
 
-### Controls
+### Pattern editor
 
 The heart of a tracker-based sequencer is the [pattern editor](https://www.renoise.com/sites/default/files/images/screenshots/pattern-editor-300.png)—a grid of cells into which audio events can be entered.
 
@@ -55,7 +55,7 @@ I want Soft Elixir to have first-class keyboard navigation, so it's important th
   <div class="grid-text">
     <h3>Grid demo</h3>
     <p>Navigate using arrow keys.</p>
-    <p>Enter data with number keys. Clear with "d".</p>
+    <p>Enter data with number keys. Clear with [ d ].</p>
     <br />
     <h3>Modifiers</h3>
     <ul>
@@ -68,6 +68,11 @@ I want Soft Elixir to have first-class keyboard navigation, so it's important th
   </div>
   <grid-numbers></grid-numbers>
 </div>
+
+The grid control is built with my [custom element class]() as a base. This utility class provides me with the following: 
+
+- A type-safe model that allows me to inject it with attributes
+- A system for implementing keyboard controls, including the ability to use modifier keys
 
 ### Rendering
 
