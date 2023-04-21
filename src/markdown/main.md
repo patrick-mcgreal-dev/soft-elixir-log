@@ -13,7 +13,7 @@ Soft Elixir is a browser-based sequencer.
 
 ## Dev notes
 
-{[to do](#to-do)} // {[rendering](#rendering)} // {[sequencing](#sequencing)}
+{[to do](#to-do)} // {[sequencing](#sequencing)} // {[controls](#controls)} //{[rendering](#rendering)}
 
 ### To do
 
@@ -40,6 +40,14 @@ Soft Elixir is a browser-based sequencer.
 | DSP | Chorus | - |
 | Other | Sequencing notes | - |
 | Func | Networking | - |
+
+### Sequencing
+
+
+
+### Controls
+
+<grid-numbers></grid-numbers>
 
 ### Rendering
 
@@ -70,7 +78,3 @@ To handle user navigation and input, a DOM element can be placed on top of the c
 <video controls>
   <source src="/assets/canvas-1.mov" type="video/mp4">
 </video>
-
-### Sequencing
-
-<grid-numbers></grid-numbers>

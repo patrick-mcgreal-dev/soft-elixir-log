@@ -19,7 +19,7 @@
 <li>Sampler</li>
 </ul>
 <h2 id="dev-notes">Dev notes</h2>
-<p>{<a href="#to-do">to do</a>} // {<a href="#rendering">rendering</a>} // {<a href="#sequencing">sequencing</a>}</p>
+<p>{<a href="#to-do">to do</a>} // {<a href="#sequencing">sequencing</a>} // {<a href="#controls">controls</a>} //{<a href="#rendering">rendering</a>}</p>
 <h3 id="to-do">To do</h3>
 <table>
 <thead>
@@ -135,6 +135,9 @@
 <td>-</td>
 </tr>
 </tbody></table>
+<h3 id="sequencing">Sequencing</h3>
+<h3 id="controls">Controls</h3>
+<p><grid-numbers></grid-numbers></p>
 <h3 id="rendering">Rendering</h3>
 <p>The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It&#39;s also extremely inefficient when it comes to producing a constantly moving grid of data.</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. We can push expensive animation operations to a separate thread via a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main processing thread.</p>
@@ -157,10 +160,6 @@
 <video controls>
   <source src="/assets/canvas-1.mov" type="video/mp4">
 </video>
-
-<h3 id="sequencing">Sequencing</h3>
-<p><grid-numbers></grid-numbers></p>
-
     </div>
 </body>
 <script>

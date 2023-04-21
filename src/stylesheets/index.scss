@@ -41,7 +41,7 @@ code {
 }
 
 pre {
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     padding: 1em;
     border-radius: 3px;
     border: 2px outset;
@@ -120,6 +120,7 @@ strong {
 }
 
 video {
+    margin-bottom: 32px;
     width: 100%;
     max-width: 400px !important;
     height: 100%;
@@ -127,6 +128,7 @@ video {
 
 grid-numbers {
     font-family: monospace;
+    border: 2px outset;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
