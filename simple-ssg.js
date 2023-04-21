@@ -21,6 +21,10 @@ module.exports = {
             throw new Error('-- Directory [ ' + dir + ' ] does not exist --');
     
     },
+
+    getFile: (dir) => {
+        return fs.readFileSync(dir, 'utf8');
+    },
     
     parseMarkdown: (srcDir) => {
     

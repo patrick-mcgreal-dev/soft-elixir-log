@@ -23,7 +23,10 @@ function main() {
     ssg.checkDirExists(indexDir);
 
     let destDir = path.join(outDir, 'index.html');
-    ssg.renderPage(indexDir, destDir, { mainHTML: mainHTML });
+    ssg.renderPage(indexDir, destDir, { 
+        mainHTML: mainHTML,
+        mainScript: ssg.getFile(path.join(inDir, 'js', 'main.js'))
+    });
 
     // process index.scss
 

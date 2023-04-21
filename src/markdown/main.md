@@ -19,8 +19,10 @@ Soft Elixir is a browser-based sequencer.
 
 | Area | Task | Status |
 | --- | --- | --- |
+| Rel | Prototype 1 | In development |
+| UI | Number box | Complete |
+| UI | Text box | In development |
 | Func | Track solo controls | In development |
-| UI | Number box | In development |
 | Demo | Track 1 | In development |
 | Demo | Track 2 | In development |
 | Demo | Track 3 | Research |
@@ -31,11 +33,15 @@ Soft Elixir is a browser-based sequencer.
 | Func | Pattern play direction | - |
 | UI | VU meters | - |
 | UI | Waveform display | - |
-| UI | Text box | - |
 | Demo | Docs | - |
 | DSP | EQ | - |
 | DSP | Chorus | - |
+| Other | Sequencing notes | - |
 | Func | Networking | - |
+
+control range selection
+
+control interpolation
 
 ### Rendering
 
@@ -52,9 +58,9 @@ drawArea(top: number, bottom: number, left: number, right: number) {
   // ...
 
   // draw visible area
-  for (let column = left; column <= right; column++) {
+  for (let col = left; col <= right; col++) {
     for (let row = top; row <= bottom; row++) {
-      // draw cell
+      // draw cell at [col, row]
     }
   }
 
@@ -68,3 +74,5 @@ To handle user navigation and input, a DOM element can be placed on top of the c
 </video>
 
 ### Sequencing
+
+<grid-numbers></grid-numbers>
