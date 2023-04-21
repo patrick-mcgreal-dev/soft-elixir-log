@@ -2,7 +2,7 @@
 
 Soft Elixir is a browser-based sequencer.
 
-![Soft Elixir]()
+<!-- ![Soft Elixir]() -->
 
 {[demo]()} // {[current features](#current-features)} // {[dev notes](#dev-notes)}
 
@@ -13,9 +13,9 @@ Soft Elixir is a browser-based sequencer.
 
 ## Dev notes
 
-{[todo](#todo)} // {[rendering](#rendering)} // {[sequencing](#sequencing)}
+{[to do](#to-do)} // {[rendering](#rendering)} // {[sequencing](#sequencing)}
 
-### Todo
+### To do
 
 | Area | Task | Status |
 | --- | --- | --- |
@@ -33,15 +33,13 @@ Soft Elixir is a browser-based sequencer.
 | Func | Pattern play direction | - |
 | UI | VU meters | - |
 | UI | Waveform display | - |
+| UI | Control range selection | - |
+| UI | Control interpolation | - |
 | Demo | Docs | - |
 | DSP | EQ | - |
 | DSP | Chorus | - |
 | Other | Sequencing notes | - |
 | Func | Networking | - |
-
-control range selection
-
-control interpolation
 
 ### Rendering
 

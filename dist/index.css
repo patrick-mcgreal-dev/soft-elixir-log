@@ -69,12 +69,8 @@ body {
 .container {
   max-width: 750px;
   margin: 32px auto;
-  padding: 0 32px;
+  padding: 10px 32px;
   border: 1px dotted;
-}
-
-.container * {
-  max-width: 600px;
 }
 
 img {
@@ -103,11 +99,12 @@ pre {
   border: 2px outset;
   background-color: white;
   overflow-x: auto;
+  box-sizing: border-box;
 }
 
 h1 {
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 32px;
+  margin-bottom: 48px;
   padding-bottom: 0.3em;
   border-bottom: 3px double black;
   font-size: 1.6em;
@@ -116,20 +113,21 @@ h1 {
 }
 
 h2 {
-  margin-top: 36px;
-  margin-bottom: 16px;
+  margin-top: 56px;
+  margin-bottom: 28px;
   padding-bottom: 0.3em;
+  border-bottom: 1px solid #bdbdbd;
   font-size: 1.2em;
   font-weight: 700;
   line-height: 1.25;
 }
 
 h3 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  font-weight: 300;
+  margin-top: 52px;
+  margin-bottom: 32px;
+  font-size: 1.1em;
+  font-weight: 700;
   line-height: 1.25;
-  text-decoration: underline;
 }
 
 p {
@@ -167,6 +165,7 @@ strong {
 }
 
 video {
+  width: 100%;
   max-width: 400px !important;
   height: 100%;
 }

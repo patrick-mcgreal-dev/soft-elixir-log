@@ -10,7 +10,8 @@
     <div class="container">
         <h1 id="soft-elixir">Soft Elixir</h1>
 <p>Soft Elixir is a browser-based sequencer.</p>
-<p><img src="" alt="Soft Elixir"></p>
+<!-- ![Soft Elixir]() -->
+
 <p>{<a href="">demo</a>} // {<a href="#current-features">current features</a>} // {<a href="#dev-notes">dev notes</a>}</p>
 <h2 id="current-features">Current features</h2>
 <ul>
@@ -18,8 +19,8 @@
 <li>Sampler</li>
 </ul>
 <h2 id="dev-notes">Dev notes</h2>
-<p>{<a href="#todo">todo</a>} // {<a href="#rendering">rendering</a>} // {<a href="#sequencing">sequencing</a>}</p>
-<h3 id="todo">Todo</h3>
+<p>{<a href="#to-do">to do</a>} // {<a href="#rendering">rendering</a>} // {<a href="#sequencing">sequencing</a>}</p>
+<h3 id="to-do">To do</h3>
 <table>
 <thead>
 <tr>
@@ -99,6 +100,16 @@
 <td>-</td>
 </tr>
 <tr>
+<td>UI</td>
+<td>Control range selection</td>
+<td>-</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>Control interpolation</td>
+<td>-</td>
+</tr>
+<tr>
 <td>Demo</td>
 <td>Docs</td>
 <td>-</td>
@@ -124,8 +135,6 @@
 <td>-</td>
 </tr>
 </tbody></table>
-<p>control range selection</p>
-<p>control interpolation</p>
 <h3 id="rendering">Rendering</h3>
 <p>The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It&#39;s also extremely inefficient when it comes to producing a constantly moving grid of data.</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. We can push expensive animation operations to a separate thread via a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main processing thread.</p>
