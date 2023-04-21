@@ -151,6 +151,7 @@
 
       display: flex;
       justify-content: center;
+      align-items: center;
       
       background-color: #e3e0e0;
       color: blue;
@@ -506,5 +507,5 @@
       controlRegions[region].setModelValue("active", clickInRegion);
     }
   });
-  controlRegions["grid-numbers"].setModel({ cells: [8, 8], active: true });
+  controlRegions["grid-numbers"].setModel({ cells: [8, 8], active: false });
 })();

@@ -137,7 +137,26 @@
 </tbody></table>
 <h3 id="sequencing">Sequencing</h3>
 <h3 id="controls">Controls</h3>
-<p><grid-numbers></grid-numbers></p>
+<p>The heart of a tracker-based sequencer is the <a href="https://www.renoise.com/sites/default/files/images/screenshots/pattern-editor-300.png">pattern editor</a>—a grid of cells into which audio events can be entered.</p>
+<p>I want Soft Elixir to have first-class keyboard navigation, so it&#39;s important that moving around in the pattern editor feels snappy and intuitive.</p>
+<div class="grid-demo">
+  <div class="grid-text">
+    <h3>Grid demo</h3>
+    <p>Navigate using arrow keys.</p>
+    <p>Enter data with number keys. Clear with "d".</p>
+    <br />
+    <h3>Modifiers</h3>
+    <ul>
+      <li>[ a + arrow ] :: move to the end of the grid in the specified direction</li>
+      <li>[ s + arrow-up ] :: increment number by one</li>
+      <li>[ s + arrow-down ] :: decrement number by one</li>
+      <li>[ s + arrow-right ] :: increment number by ten</li>
+      <li>[ s + arrow-left ] :: decrement number by ten</li>
+    </ul>
+  </div>
+  <grid-numbers></grid-numbers>
+</div>
+
 <h3 id="rendering">Rendering</h3>
 <p>The demo version of Soft Elixir renders its display using DOM elements. As a web-developer, the DOM is a very intuitive way of working. It&#39;s also extremely inefficient when it comes to producing a constantly moving grid of data.</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. We can push expensive animation operations to a separate thread via a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main processing thread.</p>
@@ -316,6 +335,7 @@
 
       display: flex;
       justify-content: center;
+      align-items: center;
       
       background-color: #e3e0e0;
       color: blue;
@@ -671,7 +691,7 @@
       controlRegions[region].setModelValue("active", clickInRegion);
     }
   });
-  controlRegions["grid-numbers"].setModel({ cells: [8, 8], active: true });
+  controlRegions["grid-numbers"].setModel({ cells: [8, 8], active: false });
 })();
 
 </script>
