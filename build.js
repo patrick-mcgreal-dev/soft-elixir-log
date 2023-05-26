@@ -1,40 +1,43 @@
 const path = require("path");
 const ssg = require("./simple-ssg");
 
-const INPUT = "src";
-const OUTPUT = "dist";
+const INPUT_DIR = "src";
+const OUTPUT_DIR = "dist";
+
+const PAGES = [
+  "index"
+];
 
 function main() {
 
-    let inDir = path.join(__dirname, INPUT);
-    ssg.checkDirExists(inDir);
+  let inDir = path.join(__dirname, INPUT_DIR);
+  ssg.checkDirExists(inDir);
 
-    let outDir = path.join(__dirname, OUTPUT);
-    ssg.checkDirExists(outDir);
+  let outDir = path.join(__dirname, OUTPUT_DIR);
+  ssg.checkDirExists(outDir);
 
-    // process main.md
+  // generate pages
 
-    let markdownDir = path.join(inDir, "markdown", "index.md");
-    let mainHTML = ssg.parseMarkdown(markdownDir);
+  const ejsTemplateDir = path.join(inDir, "pages", "template.ejs");
 
-    // process index.ejs
+  for (let page of PAGES) {
 
-    let indexDir = path.join(inDir, "pages", "index.ejs");
-    ssg.checkDirExists(indexDir);
+    const html = ssg.parseMarkdown(path.join(inDir, "markdown", `${page}.md`));
 
-    let destDir = path.join(outDir, "index.html");
-    ssg.renderPage(indexDir, destDir, { 
-        mainHTML: mainHTML,
-        mainScript: ssg.getFile(path.join(inDir, "js", "main.js"))
-    });
+    ssg.renderPage(
+      ejsTemplateDir, 
+      path.join(outDir, `${page}.html`),
+      {
+        html: html,
+        script: ssg.getFile(path.join(inDir, "js", "main.js")),
+      }
+    );
 
-    // process index.scss
+    ssg.renderStyle(
+      path.join(inDir, "stylesheets", `${page}.scss`), 
+      path.join(outDir, `${page}.css`));
 
-    let styleDir = path.join(inDir, "stylesheets", "index.scss");
-    ssg.checkDirExists(styleDir);
-
-    destDir = path.join(outDir, "index.css");
-    ssg.renderStyle(styleDir, destDir);
+  }
 
 }
 
