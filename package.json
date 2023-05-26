@@ -5,6 +5,7 @@
   "main": "build.js",
   "scripts": {
     "build": "nodemon build.js",
+    "build-js": "npx esbuild --bundle src/js/dev.js --outdir=dist/js",
     "serve": "node server.js",
     "dev": "npm run build & npm run serve"
   },
