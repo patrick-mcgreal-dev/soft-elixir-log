@@ -5,7 +5,7 @@ const INPUT_DIR = "src";
 const OUTPUT_DIR = "dist";
 
 const PAGES = [
-  "index"
+  { md: "index", css: "index" },
 ];
 
 function main() {
@@ -20,20 +20,21 @@ function main() {
 
   for (let page of PAGES) {
 
-    const html = ssg.parseMarkdown(path.join(inDir, "markdown", `${page}.md`));
+    const html = ssg.parseMarkdown(path.join(inDir, "markdown", `${page.md}.md`));
 
     ssg.renderPage(
       ejsTemplateDir, 
-      path.join(outDir, `${page}.html`),
+      path.join(outDir, `${page.md}.html`),
       {
         html: html,
+        css: page.css,
         script: ssg.getFile(path.join(inDir, "js", "main.js")),
       }
     );
 
     ssg.renderStyle(
-      path.join(inDir, "stylesheets", `${page}.scss`), 
-      path.join(outDir, `${page}.css`));
+      path.join(inDir, "stylesheets", `${page.css}.scss`),
+      path.join(outDir, `${page.scss}.css`));
 
   }
 
