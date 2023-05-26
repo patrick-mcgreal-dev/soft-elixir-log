@@ -8,14 +8,13 @@ const PAGES = [
   { md: "index", css: "index", js: "index" },
 ];
 
-const generatedCss = [];
-
 function main() {
 
   const inDir = path.join(__dirname, INPUT_DIR);
   const outDir = path.join(__dirname, OUTPUT_DIR);
 
   const ejsTemplateDir = path.join(inDir, "pages", "template.ejs");
+  const generatedCss = [];
 
   for (let page of PAGES) {
 
