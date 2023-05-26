@@ -34,7 +34,7 @@ function main() {
 
     ssg.renderStyle(
       path.join(inDir, "stylesheets", `${page.css}.scss`),
-      path.join(outDir, `${page.scss}.css`));
+      path.join(outDir, `${page.css}.css`));
 
   }
 
