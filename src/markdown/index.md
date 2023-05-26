@@ -4,7 +4,7 @@ Soft Elixir is a browser-based digital audio workstation.
 
 <!-- ![Soft Elixir]() -->
 
-<!--{[current features](#current-features)} // {[dev notes](#dev-notes)} -->
+{[demo](#)} {[current features](#current-features)} {[dev notes](#dev-notes)}
 
 ## Current features
 
