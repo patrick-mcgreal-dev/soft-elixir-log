@@ -1,6 +1,6 @@
 # Soft Elixir
 
-Soft Elixir is a browser-based sequencer.
+Soft Elixir is a browser-based digital audio workstation.
 
 <!-- ![Soft Elixir]() -->
 
@@ -25,7 +25,6 @@ Soft Elixir is a browser-based sequencer.
 | Func | Track solo controls | In development |
 | Demo | Track 1 | In development |
 | Demo | Track 2 | In development |
-| Demo | Track 3 | Research |
 | DSP | Delay | Research |
 | DSP | Reverb | Research |
 | Func | Track FX | - |
@@ -69,7 +68,7 @@ I want Soft Elixir to have first-class keyboard navigation, so it's important th
   <grid-numbers></grid-numbers>
 </div>
 
-The grid control is built with my [custom element class]() as a base. This utility class provides me with the following: 
+The grid control is built with my [custom element class](https://github.com/patrick-mcgreal-dev/custom-element/blob/master/custom-element.ts) as a base. This utility class provides me with the following: 
 
 - A type-safe model that allows me to inject it with attributes
 - A system for implementing keyboard controls, including the ability to use modifier keys
