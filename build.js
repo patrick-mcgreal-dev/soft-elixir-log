@@ -10,13 +10,11 @@ const PAGES = [
 
 function main() {
 
-  let inDir = path.join(__dirname, INPUT_DIR);
+  const inDir = path.join(__dirname, INPUT_DIR);
   ssg.checkDirExists(inDir);
 
-  let outDir = path.join(__dirname, OUTPUT_DIR);
+  const outDir = path.join(__dirname, OUTPUT_DIR);
   ssg.checkDirExists(outDir);
-
-  // generate pages
 
   const ejsTemplateDir = path.join(inDir, "pages", "template.ejs");
 
