@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soft Elixir</title>
-    <link rel="stylesheet" href="<%= css %>.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soft Elixir</title>
+  <link rel="stylesheet" href="<%= css %>.css">
 </head>
 <body>
-    <div class="container">
-        <%- html %>
-    </div>
+  <div class="container">
+    <header>
+      <a href="."><h1>Soft Elixir</h1></a>
+      <nav>
+        <div>{<a href=".">demo</a>}</div>
+        <div>{<a href="features">features</a>}</div>
+        <div>{<a href="dev">dev notes</a>}</div>
+      </nav>
+    </header>
+    <%- html %>
+  </div>
 </body>
 <script>
-    <%- script %>
+  <%- script %>
 </script>
 </html>
