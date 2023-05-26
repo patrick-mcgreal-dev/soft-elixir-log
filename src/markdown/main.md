@@ -4,18 +4,14 @@ Soft Elixir is a browser-based digital audio workstation.
 
 <!-- ![Soft Elixir]() -->
 
-{[demo]()} // {[current features](#current-features)} // {[dev notes](#dev-notes)}
+<!--{[current features](#current-features)} // {[dev notes](#dev-notes)} -->
 
 ## Current features
 
 - Tracker-style pattern sequencing
 - Sampler
 
-## Dev notes
-
-{[to do](#to-do)} // {[sequencing](#sequencing)} // {[pattern editor](#pattern-editor)} //{[rendering](#rendering)}
-
-### To do
+## To do
 
 | Area | Task | Status |
 | --- | --- | --- |
@@ -39,6 +35,10 @@ Soft Elixir is a browser-based digital audio workstation.
 | DSP | Chorus | - |
 | Other | Sequencing notes | - |
 | Func | Networking | - |
+
+## Dev notes
+
+{[sequencing](#sequencing)} {[pattern editor](#pattern-editor)} {[rendering](#rendering)}
 
 ### Sequencing
 

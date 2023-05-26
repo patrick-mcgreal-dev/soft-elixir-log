@@ -64,13 +64,8 @@ body {
   font-family: Times;
   background-color: #f7f7f7;
   padding: 0 16px;
-}
-
-.container {
-  max-width: 640px;
+  max-width: 1000px;
   margin: 32px auto;
-  padding: 10px 32px;
-  border: 1px dotted;
 }
 
 img {
@@ -117,7 +112,7 @@ h2 {
   margin-bottom: 28px;
   padding-bottom: 0.3em;
   border-bottom: 1px solid #bdbdbd;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 700;
   line-height: 1.25;
 }
@@ -125,7 +120,7 @@ h2 {
 h3 {
   margin-top: 52px;
   margin-bottom: 32px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: 700;
   line-height: 1.25;
 }
