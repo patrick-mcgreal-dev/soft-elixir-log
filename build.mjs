@@ -1,8 +1,15 @@
-const path = require("path");
-const ssg = require("./simple-ssg");
+import * as path from "path";
+import { fileURLToPath } from 'url';
+import * as ssg from "./simple-ssg.mjs";
+import * as esbuild from "esbuild";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const INPUT_DIR = "src";
 const OUTPUT_DIR = "dist";
+
+console.log(ssg)
+console.log(ssg.parseMarkdown);
 
 const PAGES = [
   { md: "index", css: "_common" },
