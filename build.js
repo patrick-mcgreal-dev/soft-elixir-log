@@ -5,9 +5,9 @@ const INPUT_DIR = "src";
 const OUTPUT_DIR = "dist";
 
 const PAGES = [
-  { md: "index", css: "index" },
-  { md: "features", css: "index" },
-  { md: "dev", css: "index" },
+  { md: "index", css: "_common" },
+  { md: "features", css: "_common" },
+  { md: "dev", css: "dev", js: "dev" },
 ];
 
 function main() {

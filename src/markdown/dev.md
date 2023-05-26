@@ -1,4 +1,8 @@
-{[sequencing](#sequencing)} {[pattern editor](#pattern-editor)} {[rendering](#rendering)}
+<nav class="vertical">
+  <div>{<a href="#sequencing">sequencing</a>}</div>
+  <div>{<a href="#pattern-editor">pattern editor</a>}</div>
+  <div>{<a href="#rendering">rendering</a>}</div>
+</nav>
 
 ## Sequencing
 
