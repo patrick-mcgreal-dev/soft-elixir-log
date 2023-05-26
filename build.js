@@ -8,13 +8,12 @@ const PAGES = [
   { md: "index", css: "index", js: "index" },
 ];
 
+const generatedCss = [];
+
 function main() {
 
   const inDir = path.join(__dirname, INPUT_DIR);
-  ssg.checkDirExists(inDir);
-
   const outDir = path.join(__dirname, OUTPUT_DIR);
-  ssg.checkDirExists(outDir);
 
   const ejsTemplateDir = path.join(inDir, "pages", "template.ejs");
 
@@ -32,9 +31,15 @@ function main() {
       }
     );
 
-    ssg.renderStyle(
-      path.join(inDir, "stylesheets", `${page.css}.scss`),
-      path.join(outDir, `${page.css}.css`));
+    if (!generatedCss.includes(page.css)) {
+
+      ssg.renderStyle(
+        path.join(inDir, "stylesheets", `${page.css}.scss`),
+        path.join(outDir, `${page.css}.css`));
+
+        generatedCss.push(page.css);
+
+    }
 
   }
 
