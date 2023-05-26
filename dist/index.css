@@ -97,6 +97,10 @@ pre {
   box-sizing: border-box;
 }
 
+em {
+  font-style: italic;
+}
+
 header {
   margin-top: 32px;
   margin-bottom: 48px;
@@ -126,25 +130,22 @@ h1 {
 h2 {
   margin-top: 56px;
   margin-bottom: 28px;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid #bdbdbd;
   font-size: 1.4em;
   font-weight: 700;
   line-height: 1.25;
 }
 
 h3 {
-  margin-top: 52px;
-  margin-bottom: 32px;
-  font-size: 1.2em;
+  margin-bottom: 12px;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
 }
 
 p {
-  margin-bottom: 32px;
+  margin-bottom: 30px;
   line-height: 1.5em;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 ul {

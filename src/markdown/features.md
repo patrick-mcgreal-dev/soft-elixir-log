@@ -1,29 +1,23 @@
-## Current features
+## Current
 
-- Tracker-style pattern sequencing
-- Sampler
+- tracker-style pattern sequencing
+- custom synth functions
+- sampler
+- pattern automation
+- mouseless controls
 
-## To do
+## Future
 
 | Area | Task | Status |
 | --- | --- | --- |
-| Rel | Prototype 1 | In development |
-| UI | Number box | Complete |
-| UI | Text box | In development |
-| Func | Track solo controls | In development |
-| Demo | Track 1 | In development |
-| Demo | Track 2 | In development |
-| DSP | Delay | Research |
-| DSP | Reverb | Research |
-| Func | Track FX | - |
-| Func | Song data schema validation | - |
-| Func | Pattern play direction | - |
-| UI | VU meters | - |
-| UI | Waveform display | - |
-| UI | Control range selection | - |
-| UI | Control interpolation | - |
-| Demo | Docs | - |
+| DSP | delay | research |
+| DSP | reverb | research |
 | DSP | EQ | - |
-| DSP | Chorus | - |
-| Other | Sequencing notes | - |
-| Func | Networking | - |
+| DSP | chorus | - |
+| Func | pattern play direction | - |
+| Func | track FX | - |
+| Func | networking | - |
+| UI | CPU meter | - |
+| UI | VU meters | - |
+| UI | waveform display | - |
+| UI | range interpolation | - |
