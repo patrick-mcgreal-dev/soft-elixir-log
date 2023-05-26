@@ -5,7 +5,7 @@ const INPUT_DIR = "src";
 const OUTPUT_DIR = "dist";
 
 const PAGES = [
-  { md: "index", css: "index" },
+  { md: "index", css: "index", js: "index" },
 ];
 
 function main() {
@@ -28,7 +28,7 @@ function main() {
       {
         html: html,
         css: page.css,
-        script: ssg.getFile(path.join(inDir, "js", "main.js")),
+        script: page.js ? ssg.getFile(path.join(inDir, "js", `${page.js}.js`)) : "",
       }
     );
 
