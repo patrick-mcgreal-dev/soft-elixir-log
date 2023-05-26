@@ -1,6 +1,8 @@
-Soft Elixir is a browser-based digital audio workstation with a [tracker-like](https://en.wikipedia.org/wiki/Music_tracker) interface.
+![Soft Elixir](/assets/soft-elixir-1.png)
+![Soft Elixir](/assets/soft-elixir-2.png)
+![Soft Elixir](/assets/soft-elixir-3.png)
 
-![Soft Elixir](/assets/soft-elixir.png)
+Soft Elixir is a browser-based digital audio workstation with a [tracker-like](https://en.wikipedia.org/wiki/Music_tracker) interface.
 
 ## Release Schedule
 
