@@ -19,5 +19,7 @@
     <%- html %>
   </div>
 </body>
-<script src="js/<%= script  %>.js"></script>
+<% if (script) { %>
+  <script src="js/<%= script  %>.js"></script>
+<% } %>
 </html>
