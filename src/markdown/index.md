@@ -6,7 +6,7 @@ Soft Elixir is a browser-based digital audio workstation with a [tracker-like](h
 
 ## Release Schedule
 
-### ░ 10-07-2023 ░
+### 10-07-2023
 
 Alpha 0.0.1
 

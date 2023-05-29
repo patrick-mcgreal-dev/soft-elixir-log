@@ -1,23 +1,16 @@
 ## Current
 
-- tracker-style pattern sequencing
+- tracker-style pattern sequencing and automation
 - custom synth functions
 - sampler
-- pattern automation
 - mouseless controls
 
 ## Future
 
-| Area | Task | Status |
-| --- | --- | --- |
-| DSP | delay | research |
-| DSP | reverb | research |
-| DSP | EQ | - |
-| DSP | chorus | - |
-| Func | pattern play direction | - |
-| Func | track FX | - |
-| Func | networking | - |
-| UI | CPU meter | - |
-| UI | VU meters | - |
-| UI | waveform display | - |
-| UI | range interpolation | - |
+- FX: reverb, delay, chorus, EQ
+- pattern play directions
+- pattern range interpolation
+- CPU meter
+- track VU meters
+- sample waveform display
+- networking
