@@ -1,43 +1,47 @@
 @use 'common';
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* ======================================== */
 /* DEV start */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* ======================================== */
+
+p {
+  max-width: 620px;
+}
 
 .grid-demo {
-    margin-bottom: 32px;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    overflow-x: auto;
-    background-color: #efefef;
+  margin-bottom: 32px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow-x: auto;
+  background-color: #efefef;
 }
 
 .grid-text {
-    font-size: .9em;
+  font-size: .9em;
 }
 
 .grid-text h3 {
-    margin-top: 6px;
-    margin-bottom: 16px;
-    border-bottom: 0;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border-bottom: 0;
 }
 
 .grid-text p {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .grid-text li {
-    line-height: 1.3rem;
-    font-size: 1em;
+  line-height: 1.3rem;
+  font-size: 1em;
 }
 
 grid-numbers {
-    font-family: monospace;
-    align-self: flex-start;
+  font-family: monospace;
+  align-self: flex-start;
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* ======================================== */
 /* DEV end */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* ======================================== */
