@@ -1,14 +1,16 @@
 <nav class="vertical">
-  <div>{<a href="#sequencing">sequencing</a>}</div>
+  <div>{<a href="#custom-synth-functions">custom synth functions</a>}</div>
   <div>{<a href="#pattern-editor">pattern editor</a>}</div>
   <div>{<a href="#rendering">rendering</a>}</div>
 </nav>
 
-## Sequencing
+## Custom Synth Functions
 
 
 
 ## Pattern editor
+
+![Soft Elixir](/assets/soft-elixir-2.png)
 
 The heart of a tracker-based sequencer is the [pattern editor](https://www.renoise.com/sites/default/files/images/screenshots/pattern-editor-300.png)—a grid of cells into which audio events can be entered.
 
@@ -32,7 +34,7 @@ I want Soft Elixir to have first-class keyboard navigation, so it's important th
   <grid-numbers></grid-numbers>
 </div>
 
-The grid control is built with my [custom element class](https://github.com/patrick-mcgreal-dev/custom-element/blob/master/custom-element.ts) as a base. This utility class provides me with the following: 
+The grid control extends a [custom element base class](https://github.com/patrick-mcgreal-dev/custom-element/blob/master/custom-element.ts). This utility class provides me with the following: 
 
 - A type-safe model that allows me to inject it with attributes
 - A system for implementing keyboard controls, including the ability to use modifier keys
