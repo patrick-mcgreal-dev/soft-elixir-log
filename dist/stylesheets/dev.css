@@ -158,11 +158,18 @@ i {
   font-style: italic;
 }
 
-ul {
+ul, ol {
   margin-top: 8px;
   margin-bottom: 16px;
   padding-left: 1.5em;
   font-size: 1em;
+}
+
+ol {
+  list-style-type: number;
+}
+
+ul {
   list-style-type: circle;
 }
 

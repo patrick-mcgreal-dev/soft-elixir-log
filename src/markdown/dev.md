@@ -7,6 +7,6 @@
   </div>
   <div>
     <h3>~ <a href="dev-synthesis">synthesis</a></h3>
-    <i>An explanation of the custom synth function signature used by Soft Elixir.</i>
+    <i>An explanation of the synthesis function signature used by Soft Elixir.</i>
   </div>
 </nav>

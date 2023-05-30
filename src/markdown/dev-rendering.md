@@ -142,13 +142,13 @@ Let's render a grid of data with the following properties:
 - width: 20 cells
 - height: 200 cells
 - visible width: 20 cells
-- visible height: 40 cells
+- visible height: 20 cells
 
-...and let's fill every cell with data, for a total of (20 * 200) = 4000 data points. This means that each time we navigate downwards beyond the visible height of the grid, the rendering thread needs to render (20 * 40) = 800 cells of data.
+...and let's fill every cell with data, for a total of (20 * 200) = 4000 data points. This means that each time we navigate downwards beyond the visible height of the grid, the rendering thread needs to render (20 * 20) = 400 cells of data.
 
 Since this is a musical application, let's measure the speed of downward navigation in BPM. If we further subdivide each beat into four musical events ("ticks"), we need to traverse four rows for each beat.
 
-We'll be call our navigate function with setInterval, so let's take a BPM and use it to calculate the time to traverse a single row in milliseconds:
+We'll be calling our navigate function with *setInterval*, so let's take a BPM and use it to calculate the time to traverse a single row in milliseconds:
 
 *100 BPM ~= 1.7 BPS ~= one beat every 588 milliseconds ~= one tick/row every 147 milliseconds*
 

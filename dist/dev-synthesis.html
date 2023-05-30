@@ -17,6 +17,56 @@
       </nav>
     </header>
     <h2 id="-synthesis-">~ Synthesis ~</h2>
+<p>
+  <nav class="vertical">
+    <div>~ <a href="#introduction">Introduction</a></div>
+    <div>~ <a href="#hello-world">Hello, world</a></div>
+  </nav>
+</p>
+
+<h3 id="introduction">Introduction</h3>
+<p>The backend of <em>Soft Elixir</em> consists of two components:</p>
+<ol>
+<li>A scheduling system</li>
+<li>A synthesis function signature</li>
+</ol>
+<p>The first system takes care of scheduling audio events to be played back at some specified future time, while the second system takes care of the audio events themselves.</p>
+<p>As <em>Soft Elixir</em> is built on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>, any of its functions are usable within a function of type <em>EventFunc</em>:</p>
+<pre><code>export type EventFunc = (
+
+  ac: AudioContext, 
+  eventStartTime: number, 
+  eventEndTime: number, 
+  args: {}
+
+) =&gt; AudioNode;
+</code></pre>
+<h3 id="hello-world">Hello, world</h3>
+<pre><code>interface TestSynthArgs extends SynthArgs {
+  freq: number
+}
+</code></pre>
+<pre><code>const TestSynthArgs_default: TestSynthArgs = {
+  gain: 0.5,
+  pan: 0,
+  freq: 440
+}
+</code></pre>
+<pre><code>const TestSynthFn: EventFunc = (
+  ac: AudioContext, eventStartTime: number, eventEndTime: number, args: TestSynthArgs) =&gt; {
+
+  const oscNode = ac.createOscillator();
+  oscNode.frequency.value = args.freq;
+  oscNode.start(eventStartTime);
+  oscNode.stop(eventStartTime + 0.05);
+
+  let lastNode: AudioNode = applyGain(ac, oscNode, args.gain);
+  if (args.pan != 0) lastNode = applyPan(ac, lastNode, args.pan);
+
+  return lastNode;
+
+}
+</code></pre>
 
   </div>
 </body>
