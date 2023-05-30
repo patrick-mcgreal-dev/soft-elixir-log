@@ -16,16 +16,16 @@ Alpha 0.0.1
 
 | Area | Task | Status |
 | --- | --- | --- |
-| UI | tracker grid | complete |
-| UI | number entry | complete |
-| UI | keyboard controls | complete |
+| UI | tracker grid | ✓ |
+| UI | number entry | ✓ |
+| UI | keyboard controls | ✓ |
 | UI | text/note entry | dev |
 | UI | cut/copy/paste | - |
 | UI | pattern sequencer | - |
-| Func | web audio API scheduler | complete |
-| Func | custom synth functions | complete |
-| Func | sampler | complete |
-| Func | pattern automation | complete |
+| Func | web audio API scheduler | ✓ |
+| Func | custom synth functions | ✓ |
+| Func | sampler | ✓ |
+| Func | pattern automation | ✓ |
 | Func | track mute/solo controls | dev |
 | Func | sample loader | - |
 | Meta | track loader | - |

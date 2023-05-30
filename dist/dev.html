@@ -32,15 +32,86 @@
 <p>The simplest solution for sending data to the rendering thread is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage">postMessage</a> method.</p>
 <p>Using this method, we can send any data we like from the main thread to the rendering thread, so long as it&#39;s supported by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</a>.</p>
 <p>However, this is also the slowest solution. A lot of computation time is wasted serialising objects on the main thread and deserialising them on the rendering thread with each update.</p>
-<p><strong>Solution 2: transferable objects</strong></p>
+<p><strong>Solution 2: transferring memory access</strong></p>
 <p>Instead of serialising objects, why not just transfer ownership entirely from the main thread to the rendering thread?</p>
 <p>The postMessage method allows us to specify which of the objects it&#39;s been handed are <em>transferable</em>, meaning that ownership of their allocated memory should be transferred between threads.</p>
 <p>As such, data objects aren&#39;t serialised or copied as in the previous solution. The only thing sent with the call to postMessage is a reference to a location in memory. However, as part of the transferring process, we also lose access to the objects in the main thread. We can no-longer access or write to the transferred blocks of memory.</p>
-<p>Just as with the previous solution, only certain items are supported by the <em>transferable</em> protocol. Our data can be represented by an array of primitive types, so <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> makes the most sense in this case. Unfortunately, this comes with the additional overhead of using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView">DataViews</a> to read and write to our shared block of memory.</p>
-<p><strong>Solution 3: SharedArrayBuffers</strong></p>
+<p>Just as with the previous solution, only certain items are supported by the <em>transferable</em> protocol. Additional mental overhead is incurred with the need to convert data to and from an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> to satisfy these requirements.</p>
+<p><strong>Solution 3: sharing memory</strong></p>
 <p>With <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer">SharedArrayBuffers</a>, we can give both threads read/write access to the same block of memory. However, the data type limitations of the previous solution still apply.</p>
 <p>Additionally, the problem of avoiding <a href="https://en.wikipedia.org/wiki/Race_condition">race conditions</a> needs to be navigated.</p>
 <p><strong>Solution 4: keep it simple, stupid</strong></p>
+<p>If the main thread doesn&#39;t need access to the rendering data, why not just pass it to the rendering thread on initialisation?</p>
+<p>Yes, the data will be serialised and deserialised if we use the postMessage method, but it will only happen once on creating the rendering thread. So long as the main thread has no use for the data, the allocated memory will be freed up by the garbage collector which means no wasted resources.</p>
+<pre><code>// CanvasWorker.js
+
+let renderingData;
+
+function createWorker(fn) {
+
+  const blob = new Blob([&quot;self.onmessage = &quot;, fn.toString()], { type: &quot;text/javascript&quot; });
+  const url = URL.createObjectURL(blob);
+  
+  return new Worker(url);
+
+}
+
+export default createWorker((e) =&gt; {
+  
+  switch (e.data.msg) {
+
+    case &quot;init&quot;: {
+
+      renderingData = e.data.renderingData;
+
+    },
+
+    case &quot;render&quot;: {
+
+      // use the renderingData variable here...
+
+    },
+
+  }
+
+}
+</code></pre>
+<p>In the above snippet, we&#39;re generating an inline Web Worker. This is nice, because we don&#39;t need to serve a separate JavaScript file just containing our worker code. It also means that we can use module imports to include it in the file containing the rest of the code for our pattern component.</p>
+<p>On initialisation, we assign the rendering data to a variable scoped to the context of the Web Worker. This means that we have access to it from the rendering portion of the code.</p>
+<pre><code>// PatternComponent.js
+
+import { default as CanvasWorker } from &quot;./CanvasWorker&quot;;
+
+let activeCellX = 0;
+let activeCellY = 0;
+
+function init(data) {
+
+  let renderingData = data;
+  // extract data relevant for rendering here...
+
+  CanvasWorker.postMessage({ 
+    msg: &quot;init&quot;,
+    renderingData: renderingData
+  });
+
+}
+
+function move() {
+
+  CanvasWorker.postMessage({
+    msg: &quot;render&quot;,
+    activeCellX: activeCellX,
+    activeCellY: activeCellY,
+  });
+
+}
+</code></pre>
+<p>Now, the only data we need to pass to the Web Worker on rendering is the position of the active cell - that is, the location of the cursor in the pattern.</p>
+<p><strong>Conclusion</strong></p>
+<p>There are a myriad of ways to communicate between worker threads in the browser.</p>
+<p>If both threads need read/write access to the same data, consider sharing memory with a SharedArrayBuffer.</p>
+<p>Otherwise, keep it simple.</p>
 <h2 id="synthesis">Synthesis</h2>
 
   </div>
