@@ -97,7 +97,9 @@ let activeCellY = 0;
 function init(data) {
 
   let renderingData = data;
-  // extract data relevant for rendering here...
+  
+  // extract data relevant for rendering
+  // ...
 
   CanvasWorker.postMessage({ 
     msg: "init",
@@ -106,7 +108,10 @@ function init(data) {
 
 }
 
-function move() {
+function navigate() {
+
+  // update activeCellX and activeCellY
+  // ...
 
   CanvasWorker.postMessage({
     msg: "render",
@@ -117,7 +122,7 @@ function move() {
 }
 ```
 
-Now, the only data we need to pass to the Web Worker on rendering is the position of the active cell - that is, the location of the cursor in the pattern.
+Now, we only need to pass the location of the user's cursor from the pattern component to the Web Worker when navigating around our pattern.
 
 **Conclusion**
 

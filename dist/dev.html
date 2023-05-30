@@ -88,7 +88,9 @@ let activeCellY = 0;
 function init(data) {
 
   let renderingData = data;
-  // extract data relevant for rendering here...
+  
+  // extract data relevant for rendering
+  // ...
 
   CanvasWorker.postMessage({ 
     msg: &quot;init&quot;,
@@ -97,7 +99,10 @@ function init(data) {
 
 }
 
-function move() {
+function navigate() {
+
+  // update activeCellX and activeCellY
+  // ...
 
   CanvasWorker.postMessage({
     msg: &quot;render&quot;,
@@ -107,7 +112,7 @@ function move() {
 
 }
 </code></pre>
-<p>Now, the only data we need to pass to the Web Worker on rendering is the position of the active cell - that is, the location of the cursor in the pattern.</p>
+<p>Now, we only need to pass the location of the user&#39;s cursor from the pattern component to the Web Worker when navigating around our pattern.</p>
 <p><strong>Conclusion</strong></p>
 <p>There are a myriad of ways to communicate between worker threads in the browser.</p>
 <p>If both threads need read/write access to the same data, consider sharing memory with a SharedArrayBuffer.</p>
