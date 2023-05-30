@@ -1,4 +1,18 @@
-## Rendering
+## ~ Rendering ~
+
+<p>
+  <nav class="vertical">
+    <div>~ <a href="#introduction">Introduction</a></div>
+    <div>~ <a href="#solution-1-serialising-objects">Solution 1: serialising objects</a></div>
+    <div>~ <a href="#solution-2-transferring-memory-access">Solution 2: transferring memory access</a></div>
+    <div>~ <a href="#solution-3-sharing-memory">Solution 3: sharing memory</a></div>
+    <div>~ <a href="#solution-4-scoped-worker-variables">Solution 4: scoped worker variables</a></div>
+    <div>~ <a href="#testing">Testing</a></div>
+    <div>~ <a href="#conclusion">Conclusion</a></div>
+  </nav>
+</p>
+
+### Introduction
 
 The pattern editor is the heart of a tracker-like sequencer. Entering notes, automating digital effects, sequencing patterns... 99% of the work that goes into composing a track happens inside this one component.
 
@@ -12,7 +26,7 @@ The main obstacle to overcome is communication between these two threads, which 
 
 Each time the pattern editor needs to be updated, the rendering thread should draw the currently visible block of data to the canvas. What's the most efficient way of providing access to this data?
 
-**Solution 1: serialising objects**
+### Solution 1: serialising objects
 
 The simplest solution for sending data to the rendering thread is the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage) method.
 
@@ -20,7 +34,7 @@ Using this method, we can send any data we like from the main thread to the rend
 
 However, this is also the slowest solution. A lot of computation time is wasted serialising objects on the main thread and deserialising them on the rendering thread with each update.
 
-**Solution 2: transferring memory access**
+### Solution 2: transferring memory access
 
 Instead of serialising objects, why not just transfer ownership entirely from the main thread to the rendering thread?
 
@@ -30,13 +44,13 @@ As such, data objects aren't serialised or copied as in the previous solution. T
 
 Just as with the previous solution, only certain items are supported by the *transferable* protocol. Additional mental overhead is incurred with the need to convert data to and from an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) to satisfy these requirements.
 
-**Solution 3: sharing memory**
+### Solution 3: sharing memory
 
 With [SharedArrayBuffers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer), we can give both threads read/write access to the same block of memory. However, the data type limitations of the previous solution still apply.
 
 Additionally, the problem of avoiding [race conditions](https://en.wikipedia.org/wiki/Race_condition) needs to be navigated.
 
-**Solution 4: keep it simple, stupid**
+### Solution 4: scoped worker variables
 
 If the main thread doesn't need access to the rendering data, why not just pass it to the rendering thread on initialisation?
 
@@ -119,7 +133,7 @@ function navigate() {
 
 Now, we only need to pass the location of the user's cursor from the pattern component to the Web Worker when navigating around our pattern.
 
-**Testing**
+### Testing
 
 Enough exposition, let's do some testing.
 
@@ -165,7 +179,7 @@ We'll be call our navigate function with setInterval, so let's take a BPM and us
 
 That's a very wide range of BPMs with zero rendering jank or UI lag :)
 
-**Conclusion**
+### Conclusion
 
 There are a myriad of ways to communicate between worker threads in the browser.
 
