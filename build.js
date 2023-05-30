@@ -2,7 +2,7 @@ const path = require("path");
 const ssg = require("./simple-ssg");
 
 const INPUT_DIR = "src";
-const OUTPUT_DIR = "dist";
+const OUTPUT_DIR = "docs";
 
 const PAGES = [
   { md: "index", css: "_common" },
