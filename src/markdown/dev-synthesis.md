@@ -14,9 +14,11 @@ The backend of *Soft Elixir* consists of two components:
 1. A scheduling system
 2. A synthesis function signature
 
-The first system takes care of scheduling audio events to be played back at some specified future time, while the second system takes care of the audio events themselves.
+The first system takes care of scheduling audio events to be played back at some specified future time, whilst the second system takes care of the audio events themselves.
 
-As *Soft Elixir* is built on the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), any of its functions are usable within a function of type *EventFunc*:
+In order to write synthesis functions compatible with *Soft Elixir*, we need to understand the second system.
+
+The synthesis function signature that *Soft Elixir* exposes is called *EventFunc*, and it looks like this:
 
 ```
 export type EventFunc = (
@@ -28,6 +30,8 @@ export type EventFunc = (
 
 ) => AudioNode;
 ```
+
+Any synthesis functions exposed by the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) are usable within an *EventFunc* function. The only requirement is that it returns a single object of type *AudioNode*.
 
 ### Hello, world
 

@@ -30,8 +30,9 @@
 <li>A scheduling system</li>
 <li>A synthesis function signature</li>
 </ol>
-<p>The first system takes care of scheduling audio events to be played back at some specified future time, while the second system takes care of the audio events themselves.</p>
-<p>As <em>Soft Elixir</em> is built on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>, any of its functions are usable within a function of type <em>EventFunc</em>:</p>
+<p>The first system takes care of scheduling audio events to be played back at some specified future time, whilst the second system takes care of the audio events themselves.</p>
+<p>In order to write synthesis functions compatible with <em>Soft Elixir</em>, we need to understand the second system.</p>
+<p>The synthesis function signature that <em>Soft Elixir</em> exposes is called <em>EventFunc</em>, and it looks like this:</p>
 <pre><code>export type EventFunc = (
 
   ac: AudioContext, 
@@ -41,6 +42,7 @@
 
 ) =&gt; AudioNode;
 </code></pre>
+<p>Any synthesis functions exposed by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> are usable within an <em>EventFunc</em> function. The only requirement is that it returns a single object of type <em>AudioNode</em>.</p>
 <h3 id="hello-world">Hello, world</h3>
 <pre><code>interface TestSynthArgs extends SynthArgs {
   freq: number
