@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soft Elixir</title>
+  <link rel="stylesheet" href="stylesheets/dev.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="."><h1>Soft Elixir</h1></a>
+      <nav>
+        <div>{<s><a href="#">demo</a></s>}</div>
+        <div>{<a href="features">features</a>}</div>
+        <div>{<a href="dev">dev notes</a>}</div>
+      </nav>
+    </header>
+    <h2 id="rendering">Rendering</h2>
+<p>The pattern editor is the heart of a tracker-like sequencer. Entering notes, automating digital effects, sequencing patterns... 99% of the work that goes into composing a track happens inside this one component.</p>
+<p><img src="/assets/soft-elixir-2.png" alt="Soft Elixir"></p>
+<p>As well as handling a lot of data, it must also be snappy and responsive at rates of over 200 BPM. This is not a good fit for DOM-based rendering.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. Expensive animation operations can be pushed to a separate rendering thread with a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main thread.</p>
+<p>The main obstacle to overcome is communication between these two threads, which should be as lightweight as possible.</p>
+<p>Each time the pattern editor needs to be updated, the rendering thread should draw the currently visible block of data to the canvas. What&#39;s the most efficient way of providing access to this data?</p>
+<p><strong>Solution 1: serialising objects</strong></p>
+<p>The simplest solution for sending data to the rendering thread is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage">postMessage</a> method.</p>
+<p>Using this method, we can send any data we like from the main thread to the rendering thread, so long as it&#39;s supported by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</a>.</p>
+<p>However, this is also the slowest solution. A lot of computation time is wasted serialising objects on the main thread and deserialising them on the rendering thread with each update.</p>
+<p><strong>Solution 2: transferring memory access</strong></p>
+<p>Instead of serialising objects, why not just transfer ownership entirely from the main thread to the rendering thread?</p>
+<p>The postMessage method allows us to specify which of the objects it&#39;s been handed are <em>transferable</em>, meaning that ownership of their allocated memory should be transferred between threads.</p>
+<p>As such, data objects aren&#39;t serialised or copied as in the previous solution. The only thing sent with the call to postMessage is a reference to a location in memory. However, as part of the transferring process, we also lose access to the objects in the main thread. We can no-longer access or write to the transferred blocks of memory.</p>
+<p>Just as with the previous solution, only certain items are supported by the <em>transferable</em> protocol. Additional mental overhead is incurred with the need to convert data to and from an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> to satisfy these requirements.</p>
+<p><strong>Solution 3: sharing memory</strong></p>
+<p>With <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer">SharedArrayBuffers</a>, we can give both threads read/write access to the same block of memory. However, the data type limitations of the previous solution still apply.</p>
+<p>Additionally, the problem of avoiding <a href="https://en.wikipedia.org/wiki/Race_condition">race conditions</a> needs to be navigated.</p>
+<p><strong>Solution 4: keep it simple, stupid</strong></p>
+<p>If the main thread doesn&#39;t need access to the rendering data, why not just pass it to the rendering thread on initialisation?</p>
+<p>Yes, the data will be serialised and deserialised if we use the postMessage method, but it will only happen once on creating the rendering thread. So long as the main thread has no use for the data, the allocated memory will be freed up by the garbage collector which means no wasted resources.</p>
+<pre><code>// CanvasWorker.js
+
+let renderingData;
+
+function createWorker(fn) {
+
+  const blob = new Blob([&quot;self.onmessage = &quot;, fn.toString()], { type: &quot;text/javascript&quot; });
+  const url = URL.createObjectURL(blob);
+  
+  return new Worker(url);
+
+}
+
+export default createWorker((e) =&gt; {
+  
+  switch (e.data.msg) {
+
+    case &quot;init&quot;: {
+
+      renderingData = e.data.renderingData;
+
+    },
+
+    case &quot;render&quot;: {
+
+      // use the renderingData variable here...
+
+    },
+
+  }
+
+}
+</code></pre>
+<p>In the above snippet, we&#39;re generating an inline Web Worker. This is nice, because we don&#39;t need to serve a separate JavaScript file just containing our worker code. It also means that we can use module imports to include it in the file containing the rest of the code for our pattern component.</p>
+<p>On initialisation, we assign the rendering data to a variable scoped to the context of the Web Worker. This means that we have access to it from the rendering portion of the code.</p>
+<pre><code>// PatternComponent.js
+
+import { default as CanvasWorker } from &quot;./CanvasWorker&quot;;
+
+let activeCellX = 0;
+let activeCellY = 0;
+
+function init(data) {
+
+  let renderingData = data;
+
+  // extract data relevant for rendering
+  // ...
+
+  CanvasWorker.postMessage({ 
+    msg: &quot;init&quot;,
+    renderingData: renderingData
+  });
+
+}
+
+function navigate() {
+
+  // update activeCellX and activeCellY
+  // ...
+
+  CanvasWorker.postMessage({
+    msg: &quot;render&quot;,
+    activeCellX: activeCellX,
+    activeCellY: activeCellY,
+  });
+
+}
+</code></pre>
+<p>Now, we only need to pass the location of the user&#39;s cursor from the pattern component to the Web Worker when navigating around our pattern.</p>
+<p><strong>Testing</strong></p>
+<p>Enough exposition, let&#39;s do some testing.</p>
+<p>Let&#39;s render a grid of data with the following properties:</p>
+<ul>
+<li>width: 20 cells</li>
+<li>height: 200 cells</li>
+<li>visible width: 20 cells</li>
+<li>visible height: 40 cells</li>
+</ul>
+<p>...and let&#39;s fill every cell with data, for a total of (20 * 200) = 4000 data points. This means that each time we navigate downwards beyond the visible height of the grid, the rendering thread needs to render (20 * 40) = 800 cells of data.</p>
+<p>Since this is a musical application, let&#39;s measure the speed of downward navigation in BPM. If we further subdivide each beat into four musical events (&quot;ticks&quot;), we need to traverse four rows for each beat.</p>
+<p>We&#39;ll be call our navigate function with setInterval, so let&#39;s take a BPM and use it to calculate the time to traverse a single row in milliseconds:</p>
+<p><em>100 BPM ~= 1.7 BPS ~= one beat every 588 milliseconds ~= one tick/row every 147 milliseconds</em></p>
+<p>
+ <video width="320" height="240" controls>
+  <source src="/assets/canvas-test-100.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+</p>
+
+<p><em>500 BPM ~= 8.3 BPS ~= one beat every 120 milliseconds ~= one tick/row every 30 milliseconds</em></p>
+<p>
+ <video width="320" height="240" controls>
+  <source src="/assets/canvas-test-500.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+</p>
+
+<p><em>1000 BPM ~= 16.7 BPS ~= one beat every 60 milliseconds ~= one tick/row every 15 milliseconds</em></p>
+<p>
+ <video width="320" height="240" controls>
+  <source src="/assets/canvas-test-1000.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+</p>
+
+<p>That&#39;s a very wide range of BPMs with zero rendering jank or UI lag :)</p>
+<p><strong>Conclusion</strong></p>
+<p>There are a myriad of ways to communicate between worker threads in the browser.</p>
+<p>If both threads need read/write access to the same data, consider sharing memory with a SharedArrayBuffer.</p>
+<p>Otherwise, keep it simple.</p>
+<h2 id="synthesis">Synthesis</h2>
+
+  </div>
+</body>
+
+</html>

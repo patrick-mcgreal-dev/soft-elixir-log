@@ -7,7 +7,9 @@ const OUTPUT_DIR = "dist";
 const PAGES = [
   { md: "index", css: "_common" },
   { md: "features", css: "_common" },
-  { md: "dev", css: "dev", js: "dev" },
+  { md: "dev", css: "dev" },
+  { md: "dev-rendering", css: "dev" },
+  { md: "dev-synthesis", css: "dev" },
 ];
 
 function main() {
@@ -38,7 +40,7 @@ function main() {
         path.join(inDir, "stylesheets", `${page.css}.scss`),
         path.join(outDir, "stylesheets", `${page.css}.css`));
 
-        generatedCss.push(page.css);
+      generatedCss.push(page.css);
 
     }
 
