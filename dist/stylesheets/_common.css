@@ -118,6 +118,7 @@ nav {
 
 nav.vertical {
   flex-direction: column;
+  gap: 6px;
 }
 
 header a {
@@ -151,6 +152,10 @@ p {
   margin-bottom: 30px;
   line-height: 1.5em;
   font-size: 1em;
+}
+
+i {
+  font-style: italic;
 }
 
 ul {
