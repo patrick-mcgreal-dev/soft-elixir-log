@@ -97,7 +97,7 @@ let activeCellY = 0;
 function init(data) {
 
   let renderingData = data;
-  
+
   // extract data relevant for rendering
   // ...
 
@@ -123,6 +123,52 @@ function navigate() {
 ```
 
 Now, we only need to pass the location of the user's cursor from the pattern component to the Web Worker when navigating around our pattern.
+
+**Testing**
+
+Enough exposition, let's do some testing.
+
+Let's render a grid of data with the following properties:
+
+- width: 20 cells
+- height: 200 cells
+- visible width: 20 cells
+- visible height: 40 cells
+
+...and let's fill every cell with data, for a total of (20 * 200) = 4000 data points. This means that each time we navigate downwards beyond the visible height of the grid, the rendering thread needs to render (20 * 40) = 800 cells of data.
+
+Since this is a musical application, let's measure the speed of downward navigation in BPM. If we further subdivide each beat into four musical events ("ticks"), we need to traverse four rows for each beat.
+
+We'll be call our navigate function with setInterval, so let's take a BPM and use it to calculate the time to traverse a single row in milliseconds:
+
+*100 BPM ~= 1.7 BPS ~= one beat every 588 milliseconds ~= one tick/row every 147 milliseconds*
+
+<p>
+ <video width="320" height="240" controls>
+  <source src="/assets/canvas-test-100.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+</p>
+
+*500 BPM ~= 8.3 BPS ~= one beat every 120 milliseconds ~= one tick/row every 30 milliseconds*
+
+<p>
+ <video width="320" height="240" controls>
+  <source src="/assets/canvas-test-500.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+</p>
+
+*1000 BPM ~= 16.7 BPS ~= one beat every 60 milliseconds ~= one tick/row every 15 milliseconds*
+
+<p>
+ <video width="320" height="240" controls>
+  <source src="/assets/canvas-test-1000.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+</p>
+
+That's a very wide range of BPMs with zero rendering jank or UI lag :)
 
 **Conclusion**
 
