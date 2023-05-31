@@ -5,8 +5,8 @@ const INPUT_DIR = "src";
 const OUTPUT_DIR = "docs";
 
 const PAGES = [
-  { md: "index", css: "_common" },
-  { md: "features", css: "_common" },
+  { md: "index", css: "common" },
+  { md: "features", css: "common" },
   { md: "dev", css: "dev" },
   { md: "dev-rendering", css: "dev" },
   { md: "dev-synthesis", css: "dev" },
