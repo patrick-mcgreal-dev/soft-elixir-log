@@ -58,7 +58,7 @@ const SineSynthFn: EventFunc = (
 
 *SineSynthFn* uses the supplied *AudioContext* argument to create an [OscillatorNode](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode).
 
-The *eventStartTime* and *eventEndTime* arguments are used to set the start and stop time of the oscillator.
+The *eventStartTime* argument is used to set the start and stop time of the oscillator.
 
 Finally, the oscillator node is returned.
 
