@@ -31,7 +31,7 @@
 
 <h3 id="introduction">Introduction</h3>
 <p>The pattern editor is the heart of a tracker-like sequencer. Entering notes, automating digital effects, sequencing patterns... 99% of the work that goes into composing a track happens inside this one component.</p>
-<p><img src="/assets/soft-elixir-2.png" alt="Soft Elixir"></p>
+<p><img src="./assets/soft-elixir-2.png" alt="Soft Elixir"></p>
 <p>As well as handling a lot of data, it must also be snappy and responsive at rates of over 200 BPM. This is not a good fit for DOM-based rendering.</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">Off-screen canvas rendering</a> has obvious advantages. Expensive animation operations can be pushed to a separate rendering thread with a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">web worker</a> in order to protect the main thread.</p>
 <p>The main obstacle to overcome is communication between these two threads, which should be as lightweight as possible.</p>
@@ -136,7 +136,7 @@ function navigate() {
 <p><em>100 BPM ~= 1.7 BPS ~= one beat every 588 milliseconds ~= one tick/row every 147 milliseconds</em></p>
 <p>
  <video width="320" height="240" controls>
-  <source src="/assets/canvas-test-100.mov" type="video/mp4">
+  <source src="./assets/canvas-test-100.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 </p>
@@ -144,7 +144,7 @@ function navigate() {
 <p><em>500 BPM ~= 8.3 BPS ~= one beat every 120 milliseconds ~= one tick/row every 30 milliseconds</em></p>
 <p>
  <video width="320" height="240" controls>
-  <source src="/assets/canvas-test-500.mov" type="video/mp4">
+  <source src="./assets/canvas-test-500.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 </p>
@@ -152,7 +152,7 @@ function navigate() {
 <p><em>1000 BPM ~= 16.7 BPS ~= one beat every 60 milliseconds ~= one tick/row every 15 milliseconds</em></p>
 <p>
  <video width="320" height="240" controls>
-  <source src="/assets/canvas-test-1000.mov" type="video/mp4">
+  <source src="./assets/canvas-test-1000.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 </p>

@@ -16,7 +16,7 @@
 
 The pattern editor is the heart of a tracker-like sequencer. Entering notes, automating digital effects, sequencing patterns... 99% of the work that goes into composing a track happens inside this one component.
 
-![Soft Elixir](/assets/soft-elixir-2.png)
+![Soft Elixir](./assets/soft-elixir-2.png)
 
 As well as handling a lot of data, it must also be snappy and responsive at rates of over 200 BPM. This is not a good fit for DOM-based rendering.
 
@@ -154,7 +154,7 @@ We'll be calling our navigate function with *setInterval*, so let's take a BPM a
 
 <p>
  <video width="320" height="240" controls>
-  <source src="/assets/canvas-test-100.mov" type="video/mp4">
+  <source src="./assets/canvas-test-100.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 </p>
@@ -163,7 +163,7 @@ We'll be calling our navigate function with *setInterval*, so let's take a BPM a
 
 <p>
  <video width="320" height="240" controls>
-  <source src="/assets/canvas-test-500.mov" type="video/mp4">
+  <source src="./assets/canvas-test-500.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 </p>
@@ -172,7 +172,7 @@ We'll be calling our navigate function with *setInterval*, so let's take a BPM a
 
 <p>
  <video width="320" height="240" controls>
-  <source src="/assets/canvas-test-1000.mov" type="video/mp4">
+  <source src="./assets/canvas-test-1000.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 </p>

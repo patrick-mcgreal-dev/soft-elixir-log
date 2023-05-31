@@ -1,6 +1,6 @@
-![Soft Elixir](/assets/soft-elixir-1.png)
-![Soft Elixir](/assets/soft-elixir-2.png)
-![Soft Elixir](/assets/soft-elixir-3.png)
+![Soft Elixir](./assets/soft-elixir-1.png)
+![Soft Elixir](./assets/soft-elixir-2.png)
+![Soft Elixir](./assets/soft-elixir-3.png)
 
 <!-- <img src="/assets/soft-elixir-1.png">
 <img src="/assets/soft-elixir-2.png">
