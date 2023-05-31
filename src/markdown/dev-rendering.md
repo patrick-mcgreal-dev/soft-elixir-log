@@ -181,7 +181,7 @@ That's a very wide range of BPMs with zero rendering jank or UI lag :)
 
 ### Conclusion
 
-There are a myriad of ways to communicate between worker threads in the browser.
+There are myriad ways to communicate between worker threads in the browser.
 
 If both threads need read/write access to the same data, consider sharing memory with a SharedArrayBuffer.
 
