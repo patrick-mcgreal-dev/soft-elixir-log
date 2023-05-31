@@ -91,6 +91,7 @@ pre {
   margin-bottom: 32px;
   padding: 1em;
   border-radius: 3px;
+  border: 1px solid #afafff;
   background-color: #e1e0e0;
   color: blue;
   overflow-x: auto;
