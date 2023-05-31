@@ -21,6 +21,9 @@
   <nav class="vertical">
     <div>~ <a href="#introduction">Introduction</a></div>
     <div>~ <a href="#hello-world">Hello, world</a></div>
+    <div>~ <a href="#arguments">Arguments</a></div>
+    <div>~ <a href="#utility-functions">Utility functions</a></div>
+    <div>~ <a href="#argument-defaults">Argument defaults</a></div>
   </nav>
 </p>
 
@@ -30,8 +33,8 @@
 <li>A scheduling system</li>
 <li>A synthesis function signature</li>
 </ol>
-<p>The first system takes care of scheduling audio events to be played back at some specified future time, whilst the second system takes care of the audio events themselves.</p>
-<p>In order to write synthesis functions compatible with <em>Soft Elixir</em>, we need to understand the second system.</p>
+<p>The first component takes care of scheduling audio events to be played back at some specified future time, whilst the second takes care of the audio events themselves.</p>
+<p>In order to write synthesis functions compatible with <em>Soft Elixir</em>, we need to understand the second component.</p>
 <p>The synthesis function signature that <em>Soft Elixir</em> exposes is called <em>EventFunc</em>, and it looks like this:</p>
 <pre><code>export type EventFunc = (
 
@@ -44,18 +47,55 @@
 </code></pre>
 <p>Any synthesis functions exposed by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> are usable within an <em>EventFunc</em> function. The only requirement is that it returns a single object of type <em>AudioNode</em>.</p>
 <h3 id="hello-world">Hello, world</h3>
-<pre><code>interface TestSynthArgs extends SynthArgs {
+<p>Let&#39;s write a very simple synthesis function which will produce a short sine wave at a specific frequency.</p>
+<p>Here&#39;s a function variable that implements the <em>EventFunc</em> signature:</p>
+<pre><code>const SineSynthFn: EventFunc = (
+  ac: AudioContext, eventStartTime: number, eventEndTime: number, args: {}) =&gt; {
+
+  const oscNode = ac.createOscillator();
+  oscNode.frequency.value = 440;
+  oscNode.start(eventStartTime);
+  oscNode.stop(eventStartTime + 0.05);
+
+  return oscNode;
+
+}
+</code></pre>
+<p><em>SineSynthFn</em> uses the supplied <em>AudioContext</em> argument to create an <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a>.</p>
+<p>The <em>eventStartTime</em> and <em>eventEndTime</em> arguments are used to set the start and stop time of the oscillator.</p>
+<p>Finally, the oscillator node is returned.</p>
+<h3 id="arguments">Arguments</h3>
+<p>A synth function that only produces a 440Hz tone isn&#39;t very useful, so let&#39;s tell it to expect some frequency data from <em>Soft Elixir</em>.</p>
+<pre><code>interface SineSynthArgs {
   freq: number
 }
-</code></pre>
-<pre><code>const TestSynthArgs_default: TestSynthArgs = {
-  gain: 0.5,
-  pan: 0,
-  freq: 440
+
+const SineSynthFn: EventFunc = (
+  ac: AudioContext, eventStartTime: number, eventEndTime: number, args: SineSynthArgs) =&gt; {
+
+  const oscNode = ac.createOscillator();
+  oscNode.frequency.value = args.freq;
+  oscNode.start(eventStartTime);
+  oscNode.stop(eventStartTime + 0.05);
+  
+  return oscNode;
+
 }
 </code></pre>
-<pre><code>const TestSynthFn: EventFunc = (
-  ac: AudioContext, eventStartTime: number, eventEndTime: number, args: TestSynthArgs) =&gt; {
+<p>In the snippet above, we&#39;ve replaced the generic object expected by <em>SineSynthFn</em> with the type <em>SineSynthArgs</em>. We can pass any useful data from <em>Soft Elixir</em> to our synthesis function using this object type.</p>
+<h3 id="utility-functions">Utility functions</h3>
+<p>Right now, we&#39;re only passing a <em>frequency</em> variable. Let&#39;s add some gain and panning variables:</p>
+<pre><code>interface SynthArgs {
+  gain: number,
+  pan: number,
+}
+
+interface SineSynthArgs extends SynthArgs {
+  freq: number
+}
+
+const SineSynthFn: EventFunc = (
+  ac: AudioContext, eventStartTime: number, eventEndTime: number, args: SineSynthArgs) =&gt; {
 
   const oscNode = ac.createOscillator();
   oscNode.frequency.value = args.freq;
@@ -69,6 +109,40 @@
 
 }
 </code></pre>
+<p>We&#39;ve made use of the existing <em>SynthArgs</em> type to add <em>gain</em> and <em>pan</em> variables to our <em>SineSynthArgs</em> type. Since we often want control over gain and panning, this is a really useful base type for any synthesis function.</p>
+<p>Additionally, we&#39;ve used two existing utility functions (<em>applyGain</em> and <em>applyPan</em>) to manage our gain and pan. We&#39;re also making sure to return the last node in the chain from <em>SineSynthFn</em>. If, as before, we returned the oscillator node, neither gain nor panning would be audible.</p>
+<p>Here&#39;s what the <em>applyGain</em> and <em>applyPan</em> utility functions look like:</p>
+<pre><code>function applyGain(ac: AudioContext, node: AudioNode, gain: number) : GainNode {
+
+  const gainNode = ac.createGain();
+  gainNode.gain.value = gain;
+  node.connect(gainNode);
+
+  return gainNode;
+
+}
+</code></pre>
+<pre><code>function applyPan(ac: AudioContext, node: AudioNode, pan: number) : StereoPannerNode {
+
+  const panNode = ac.createStereoPanner();
+  panNode.pan.value = pan;
+  node.connect(panNode);
+
+  return panNode;
+  
+}
+</code></pre>
+<h3 id="argument-defaults">Argument defaults</h3>
+<p>When we&#39;re using <em>Soft Elixir</em> to sequence our function, it might be that we don&#39;t want to supply every possible argument with each musical event.</p>
+<p>As a final step, let&#39;s generate some default arguments that will be used in such a case:</p>
+<pre><code>const SineSynthArgs_default: SineSynthArgs = {
+  gain: 0.5,
+  pan: 0,
+  freq: 440
+}
+</code></pre>
+<p>The default argument object is named with the following convention: <code>&lt;ArgsObjectName&gt;_default</code>.</p>
+<p>In the case that a particular argument isn&#39;t sent from <em>Soft Elixir</em> to the synthesis function, the values in this object will be used as default.</p>
 
   </div>
 </body>
