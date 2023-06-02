@@ -1,4 +1,4 @@
-## ~ Synthesis ~
+## ~ Synthesis
 
 <p>
   <nav class="vertical">

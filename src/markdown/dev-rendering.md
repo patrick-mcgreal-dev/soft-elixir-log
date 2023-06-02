@@ -1,4 +1,4 @@
-## ~ Rendering ~
+## ~ Rendering
 
 <p>
   <nav class="vertical">
